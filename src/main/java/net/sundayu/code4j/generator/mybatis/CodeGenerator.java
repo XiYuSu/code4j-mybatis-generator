@@ -29,15 +29,7 @@ public class CodeGenerator {
             DefaultShellCallback callback = new DefaultShellCallback(overwrite);
             MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
             myBatisGenerator.generate(null);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (InvalidConfigurationException e) {
-            e.printStackTrace();
-        } catch (XMLParserException e) {
+        } catch (SQLException | XMLParserException | InterruptedException | IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         } finally {
             GeneratorContext.getInstance().closeConnection();
