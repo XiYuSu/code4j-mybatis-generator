@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 配置文件改变的时候自动去扫描 -->
+<configuration scan="true">
+	<property name="AppName" value="generator" />
+	<property name="LogPath" value="/opt/logs" />
+	<property name="RootLogLevel" value="DEBUG" />
+	<contextName>${AppName}</contextName>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender"> 
+        <encoder>
+            <pattern>
+            	[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%thread] [%file:%line] %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>${LogPath}/${AppName}/${AppName}.debug.log</file>
+		<encoder>
+			<pattern>
+				[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%thread] [%file:%line] %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+    <root level="${RootLogLevel}">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>

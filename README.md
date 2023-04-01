@@ -1,37 +1,133 @@
-# code4j-mb-generator
+# code4j-mybatis-generator
 
 #### 介绍
 基于mybatis的代码生成组件
 
-#### 软件架构
-软件架构说明
 
+#### 软件架构
+基于mybatis-generator-core 1.4.0。  
+注1：1.4.0和1.3.7有兼容性问题。  
+注2：oracle和mysql不同，表名需要大写，否则无法找到索引。
 
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+暂不涉及。目前可以通过使用CodeGenerator运行main函数简单使用。
 
-#### 使用说明
+#### 插件说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+##### Mapper接口生成插件 GenerateMapperMethodByIndexPlugin
 
-#### 参与贡献
+依赖：Table标签enableInsert=true 
+可选属性：
+1. indexScope  
+    all-所有  
+    unique-唯一索引  
+    non-unique-非唯一索引  
+    默认值  all  
+2. enablePrimaryKey  
+    true：允许按主键生成方法   
+    false：不允许按主键生成方法
+    默认值：false 有重复方法，默认false  
+3. enableSelect  
+    true：允许生成Select方法   
+    false：不允许生成Select方法
+    默认值：true  
+4. enableUpdate  
+    true：允许生成Update方法   
+    false：不允许生成Update方法
+    默认值：true  
+5. enableDelete  
+    true：允许生成Delete方法  
+    false：不允许生成Delete方法
+    默认值：true
+6. enableUniqueSelect  
+    true：允许按唯一索引生成Select方法  
+    false：不允许按唯一索引生成Select方法  
+    默认值：true  
+7. enableNonUniqueSelect  
+    true：允许按非唯一索引生成Select方法  
+    false：不允许按非唯一索引生成Select方法  
+    默认值：true  
+8. enableSingleUpdate  
+    true：允许按唯一索引生成单笔Update方法    
+    false：不允许按唯一索引生成单笔Update方法  
+    默认值：true  
+9. enableBatchUpdate  
+    true：允许按唯一索引生成多笔Update方法 
+    false：不允许按唯一索引生成多笔Update方法
+    默认值：true  
+10. enableUniqueIndexDelete  
+    true：允许按唯一索引生成Delete方法    
+    false：不允许按唯一索引生成Delete方法  
+    默认值：true  
+11. enableNonUniqueIndexDelete  
+    true：允许按非唯一索引生成Delete方法  
+    false：不允许按非唯一索引生成Delete方法  
+    默认值：true  
+12. enableSingleDelete  
+    true：允许按唯一索引生成单笔Delete方法  
+    false：不允许唯一索引生成单笔Delete方法  
+    默认值：true
+13. enableBatchDelete  
+    true：允许按唯一索引生成多笔Delete方法  
+    false：不允许唯一索引生成多笔Delete方法  
+    默认值：true  
+14. enableSingleInsert
+    true：允许生成单笔Insert方法  
+    false：不允许生成单笔Insert方法  
+    默认值：true 不可改  
+15. enableBatchInsert  
+    true：允许生成多笔Insert方法  
+    false：不允许生成多笔Insert方法  
+    默认值：true
+16. enableForUpdate  
+    true：允许生成Select锁表方法  
+    false：不允许生成Select锁表方法    
+    默认值：false  
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+示例：
+```xml
+<plugin type="net.sundayu.code4j.generator.mybatis.plugin.GenerateMapperMethodByIndexPlugin">
+    <property name="indexScope" value="all"/>
+    <property name="enableBatchInsert" value="true"/>
+</plugin>
+```
 
+##### SqlMap语句生成插件 GenerateSqlMapElementByIndexPlugin
 
-#### 特技
+同 GenerateMapperMethodByIndexPlugin 插件。  
+示例：
+```xml
+<plugin type="net.sundayu.code4j.generator.mybatis.plugin.GenerateSqlMapElementByIndexPlugin">
+    <property name="indexScope" value="all"/>
+    <property name="enableBatchInsert" value="true"/>
+</plugin>
+```
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+##### Model构造方法生成插件 GenerateModelConstructorPlugin
+
+依赖：javaModelGenerator标签属性constructorBased=true  
+示例：  
+```xml
+<plugin type="net.sundayu.code4j.generator.mybatis.plugin.GenerateModelConstructorPlugin"/>
+```
+
+##### Model重写toString插件 GenerateModelOverrideToStringPlugin
+
+示例：
+```xml
+<plugin type="net.sundayu.code4j.generator.mybatis.plugin.GenerateModelOverrideToStringPlugin"/>
+```
+
+##### SqlMap覆盖插件 ToolForOverrideSqlMapPlugin
+
+示例：
+```xml
+<plugin type="net.sundayu.code4j.generator.mybatis.plugin.ToolForOverrideSqlMapPlugin"/>
+```
+
+#### 功能探索
+
+1.基于javafx的页面操作；  
+2.基于freemarker模板的代码生成；  
+3.其他文档导出归档功能等。  
