@@ -1,8 +1,7 @@
 # code4j-mybatis-generator
 
 #### 介绍
-基于mybatis的代码生成组件
-
+基于mybatis的代码生成组件，作为学习指引。
 
 #### 软件架构
 基于mybatis-generator-core 1.4.0。  
